@@ -2,7 +2,7 @@
 
 The time spent on tasks in this test should be no more than 1 hour, good luck!
 
-Prerequsites:
+Prerequsites
 
 	Visual studio 2022 community edition https://visualstudio.microsoft.com/vs/community/
 	.Net 6.0 SDK
