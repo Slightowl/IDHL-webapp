@@ -15,7 +15,11 @@ Tasks
 	- Populate the characters table with the list of disney characters.
 		- Each row should have the following values: ID, Name, Image.
 		- Display the Characters image using the imageUrl field and size it appropriately.
-	- When clicking on a character's name in the table, route to another page and display a list of the characters films, tvshows and video games
+	- When clicking on a character's name in the table, route to another page and display 
+ 	  a list of the characters 
+		- films 
+		- tvshows
+		- video games
 	- add buttons to perform pagination in the characters table.
 	- Add a search bar to the characters table to filter data on the characters name
 	- perform any refactoring 
