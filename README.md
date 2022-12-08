@@ -1,6 +1,6 @@
 # IDHLDeveloperTest
 
-The time spent on doing the tasks in this test should be no more than 1 hour, good luck!
+The time spent on tasks in this test should be no more than 1 hour, good luck!
 
 Prerequsites:
 
