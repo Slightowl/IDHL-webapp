@@ -1,19 +1,8 @@
 ﻿@page "/"
-@inherits OwningComponentBase
-
-@using IDHLDeveloperTest.Services;
+@using IDHLDeveloperTest.Components;
 
 <PageTitle>Index</PageTitle>
 
-
-
-@code{
-    IClientService clientService;
-
-    protected override async Task OnInitializedAsync()
-    {
-        clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
-        var listresult = await clientService.GetCharacters(1);
-    }
-
-}
+<div class="contentContainer">
+    <CharactersTable></CharactersTable>
+</div>
