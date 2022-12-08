@@ -20,6 +20,6 @@ Tasks
 		- films 
 		- tvshows
 		- video games
-	- add buttons to perform pagination in the characters table.
+	- add buttons to perform pagination on the characters table.
 	- Add a search bar to the characters table to filter data on the characters name
-	- perform any refactoring 
+	- perform any refactoring
