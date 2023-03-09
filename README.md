@@ -2,7 +2,13 @@
 
 This test should be **no more than 1 hour**. Good luck!
 
-Est time took - 3hr ~
+Est time took - 3hr ~ o_o
+
+Thoughts -
+I think the concepts are *just* about there, had a bit of issue implementing it.
+Think with a few more hours could get it done but I don't want to go too much over
+the recommneded time allowance. Will defintely revist this and these concepts. Happy
+to discuss how I got.
 	
 Tasks
  
