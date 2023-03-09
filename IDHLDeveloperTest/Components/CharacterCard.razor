@@ -1,0 +1,26 @@
+﻿@inherits OwningComponentBase
+@using IDHLDeveloperTest.Models;
+@using IDHLDeveloperTest.Services;
+
+<div class="card">
+    <h5 class="card-header">Featured</h5>
+    <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <ul class="list-group">
+            <li></li>
+        </ul>
+        <a href="#" class="btn btn-primary">Go back</a>
+    </div>
+</div>
+
+@code {
+    protected IClientService clientService;
+    private CharacterList characterList = new CharacterList();
+    private Character character = new Character();
+
+    protected override async Task OnInitializedAsync()
+    {
+        clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
+        characterList = await clientService.GetCharacters(1);
+    }
+}

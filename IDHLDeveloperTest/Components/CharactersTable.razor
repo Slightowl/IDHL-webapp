@@ -5,27 +5,93 @@
 <h3>All Characters</h3>
 
 <div style="padding: 10px;">
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Image</th>
+                <th>
+                    <form method="get">
+                        <label for="search">Search:</label>
+                        <input type="text" id="search" name="search" @bind="@character.SearchString" />
+                        <button type="submit" @onclick:preventDefault @onclick="FilterNames">Search</button>
+                    </form>
+                </th>
             </tr>
         </thead>
         <tbody>
+            @foreach (Character character in characterList.data)
+            {
+                <tr>
+                    <td>@character._id</td>
+                    <td><a href="#" @onclick="@(() => OnItemClick(item))">@character.name</a></td>
+                    <td><img src="@character.imageUrl" height="100" width="100" /></td>
+                    <td></td>
+                </tr>
+            }
         </tbody>
     </table>
+    <div class="pagination">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            if (i == currentPage)
+        {
+            <span>@i</span>
+        }
+        else
+        {
+            <a href="@GetPageUrl(i)">@i</a>
+        }
+    }
+
+    </div>
 </div>
 
 @code {
     protected IClientService clientService;
     private CharacterList characterList = new CharacterList();
+    private Character character = new Character();
+    public int currentPage = 1;
+    public int itemsPerPage = 10;
+    public int totalPages;
 
+    public string GetPageUrl(int pageNumber) => $"?page={pageNumber}";
+
+    [Parameter]
+    public List<CharacterList> Data { get; set; }
+
+    [Parameter]
+    public EventCallback<CharacterList> ItemClicked { get; set; }
+
+ 
     protected override async Task OnInitializedAsync()
     {
         clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
-        characterList = await clientService.GetCharacters(1);
+        characterList = await clientService.GetCharacters(currentPage);
+
+        int startIndex = (currentPage - 1) * itemsPerPage;
+        int endIndex = Math.Min(startIndex + itemsPerPage - 1, characterList.data.Count - 1);
+        int totalPages = (int)Math.Ceiling((double)characterList.data.Count / itemsPerPage);
     }
 
+    private async Task FilterNames()
+    {
+        Console.WriteLine(character.SearchString);
+        var characters = from c in characterList.data select c;
+        if (!string.IsNullOrEmpty(character.SearchString))
+        {
+            characters = characters.Where(s => s.name.Contains(character.SearchString));
+        }
+        characterList.data = characters.ToList();
+    }
+
+    private async Task OnItemClick(CharacterList item)
+    {
+        await ItemClicked.InvokeAsync(item);
+    }
+
+
 }
+
+

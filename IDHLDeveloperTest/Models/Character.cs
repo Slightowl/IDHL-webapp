@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace IDHLDeveloperTest.Models
 {
@@ -15,5 +16,11 @@ namespace IDHLDeveloperTest.Models
         public string[]? parkAttractions { get; set; }
         public string[]? allies { get; set; }
         public string[]? enemies { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
+
+        public IList<Character> characters { get; set; }
+
     }
 }
