@@ -1,8 +1,41 @@
-﻿@page "/character-info"
+﻿@page "/character-details"
+
+
+
 @using IDHLDeveloperTest.Components;
+@using IDHLDeveloperTest.Models;
+@using IDHLDeveloperTest.Services;
+@inherits OwningComponentBase
+
 
 <PageTitle>Character Information</PageTitle>
 
 <div class="contentContainer">
     <CharacterCard></CharacterCard>
 </div>
+
+<!--
+    <div class="card">
+    <h5 class="card-header">Featured</h5>
+    <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p>Films: @character.films</p>
+        <p>TV shows: @character.tvShows</p>
+        <p>Video Games: @character.videoGames</p>
+        <a href="#" class="btn btn-primary">Go back</a>
+    </div>
+</div>
+-->
+
+@code {
+    protected IClientService clientService;
+    private CharacterList characterList = new CharacterList();
+    private Character character = new Character();
+
+    protected override async Task OnInitializedAsync()
+    {
+        clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
+        characterList = await clientService.GetCharacters(1);
+    }
+}
+

@@ -30,5 +30,7 @@ namespace IDHLDeveloperTest.Services
             var stream = await client.GetStreamAsync($"https://api.disneyapi.dev/{path}");
             return await JsonSerializer.DeserializeAsync<T>(stream);
         }
+
+
     }
 }

@@ -25,7 +25,8 @@
             {
                 <tr>
                     <td>@character._id</td>
-                    <td><a href="#" @onclick="@(() => OnItemClick(item))">@character.name</a></td>
+                    <!-- <td><a href="@character.name?@character._id">@character.name</a></td>-->
+                    <td><a href="character-details">@character.name</a></td>
                     <td><img src="@character.imageUrl" height="100" width="100" /></td>
                     <td></td>
                 </tr>
@@ -55,16 +56,9 @@
     public int currentPage = 1;
     public int itemsPerPage = 10;
     public int totalPages;
-
     public string GetPageUrl(int pageNumber) => $"?page={pageNumber}";
 
-    [Parameter]
-    public List<CharacterList> Data { get; set; }
 
-    [Parameter]
-    public EventCallback<CharacterList> ItemClicked { get; set; }
-
- 
     protected override async Task OnInitializedAsync()
     {
         clientService = (IClientService)ScopedServices.GetService(typeof(IClientService));
@@ -72,7 +66,7 @@
 
         int startIndex = (currentPage - 1) * itemsPerPage;
         int endIndex = Math.Min(startIndex + itemsPerPage - 1, characterList.data.Count - 1);
-        int totalPages = (int)Math.Ceiling((double)characterList.data.Count / itemsPerPage);
+        int totalPages = (int)Math.Ceiling((double)characterList.data.Count / itemsPerPage);     
     }
 
     private async Task FilterNames()
@@ -84,11 +78,6 @@
             characters = characters.Where(s => s.name.Contains(character.SearchString));
         }
         characterList.data = characters.ToList();
-    }
-
-    private async Task OnItemClick(CharacterList item)
-    {
-        await ItemClicked.InvokeAsync(item);
     }
 
 
